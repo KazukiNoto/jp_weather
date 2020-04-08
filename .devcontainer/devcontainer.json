@@ -15,7 +15,15 @@
 	},
 
 	// Add the IDs of extensions you want installed when the container is created.
-	"extensions": []
+	// VSCodeの拡張機能をインストール
+	"extensions": [
+		"ms-python.python",
+		"eamodio.gitlens",
+		"github.vscode-pull-request-github",
+		"ms-vscode.github-issues-prs",
+		"ms-vsliveshare.vsliveshare",
+		"visualstudioexptteam.vscodeintellicode"
+	]
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [],
