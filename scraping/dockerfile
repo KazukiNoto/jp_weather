@@ -8,7 +8,7 @@ WORKDIR /app
 ADD . /app
 
 # pip本体のアップデート
-RUN pip install  -U pip
+RUN pip install -U pip
 
 # Install any needed packages specified in requirements.txt
 RUN pip install --trusted-host pypi.python.org -r requirements.txt
@@ -17,7 +17,7 @@ RUN pip install --trusted-host pypi.python.org -r requirements.txt
 EXPOSE 80
 
 # Define environment variable
-ENV NAME daiei_forecast
+ENV NAME jp_wather_scraping
 
 # Run app.py when the container launches
 CMD ["python", "app.py"]
