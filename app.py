@@ -1,5 +1,7 @@
 from flask import Flask, jsonify,request
 from flasgger import Swagger
+from api import weather
+import json
 # import requests
 
 app = Flask(__name__)
@@ -67,6 +69,42 @@ def areaWeather():
         # print(request.form[])
         # createdata = datacreate.ret(request.json)
         return jsonify({"return":"OK"})
+    except Exception as e:
+        return str(e)
+
+
+# 週間天気情報を気象庁から取得するAPI
+# POST,Bodyは無しでOK
+# /weatherdataに取得したデータが格納される
+@app.route("/weather", methods=["POST"])
+def getWeatherReport():
+    try:
+        region = 301
+        while region < 357:
+            weather.gwr(str(region))
+            region = region + 1
+        return "compleate"
+    except Exception as e:
+        return str(e)
+
+# /getWeather
+# 受け取ったregionの天気情報を返す。
+# body: json
+# {
+#   "region":"319"
+# }
+#
+# response: str
+# [{"date": "03/28","weather": "曇り後雨","rain": "011","maxtemp": "19","mintemp": "11"},...}]
+@app.route("/getWeather", methods=["POST"])
+def gweather():
+    try:
+        print(request.json)
+        region = request.json["region"]
+        filePath = 'weatherdata/' + region + '.json'
+        with open(filePath) as f:
+            weatherlist = json.load(f)
+        return json.dumps(weatherlist, ensure_ascii=False)
     except Exception as e:
         return str(e)
 
